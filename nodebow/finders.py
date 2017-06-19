@@ -1,10 +1,10 @@
 # -*- coding: utf-8 -*-
 import os
+from collections import OrderedDict
 from django.core.exceptions import ImproperlyConfigured
 from django.conf import settings
 from django.contrib.staticfiles.finders import FileSystemFinder
 from django.core.files.storage import FileSystemStorage
-from django.utils.datastructures import SortedDict
 from . import conf
 
 
@@ -24,7 +24,7 @@ class BowerComponentsFinder(FileSystemFinder):
         self.locations = [
             ('', bower_components),
         ]
-        self.storages = SortedDict()
+        self.storages = OrderedDict()
         filesystem_storage = FileSystemStorage(location=bower_components)
         filesystem_storage.prefix = self.locations[0][0]
         self.storages[bower_components] = filesystem_storage
